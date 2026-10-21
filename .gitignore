@@ -1,0 +1,17 @@
+# Dependencies and build output
+node_modules/
+out/
+
+# WhatsApp session credentials (NEVER commit — grants access to your linked device)
+wa-auth/
+
+# Local, machine-specific VS Code settings (use settings.example.json as a template)
+.vscode/settings.json
+
+# Packaged extension
+*.vsix
+
+# Logs and OS cruft
+*.log
+.DS_Store
+Thumbs.db

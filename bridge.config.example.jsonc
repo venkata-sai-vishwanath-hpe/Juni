@@ -1,0 +1,93 @@
+// bridge.config.example.jsonc
+// -----------------------------------------------------------------------------
+// TEMPLATE / REFERENCE for bridge.config.json.
+//
+// This file is NOT loaded by the bridge. It documents every option with
+// comments and ready-to-copy MCP server templates. To use any block, copy it
+// into your real `bridge.config.json` (which must be plain JSON — no comments).
+//
+// Open the real file with: Command Palette > "Junos WhatsApp: Open Config File".
+// Restart the bridge after editing (Stop Bridge, then Start Bridge).
+// -----------------------------------------------------------------------------
+{
+  "ai": {
+    // Which AI answers messages. Pick ONE:
+    //   "copilot"   - default, no API key, uses your VS Code Copilot models
+    //   "openai"    - needs apiKeys.openai
+    //   "anthropic" - Claude, needs apiKeys.anthropic
+    //   "gemini"    - needs apiKeys.gemini
+    "provider": "copilot",
+
+    // Copilot: a model family (e.g. gpt-4o, claude-sonnet-4.5, o3-mini).
+    // Other providers: that provider's model id
+    //   openai     -> e.g. gpt-4o, gpt-4o-mini
+    //   anthropic  -> e.g. claude-3-5-sonnet-latest
+    //   gemini     -> e.g. gemini-2.0-flash, gemini-1.5-pro
+    "model": "gpt-4o",
+
+    // Only needed for non-Copilot providers. Leave blank for Copilot.
+    "apiKeys": {
+      "openai": "",
+      "anthropic": "",
+      "gemini": ""
+    }
+  },
+
+  // Leave "" to use the built-in general-purpose prompt (answers normally and
+  // automatically calls a tool when a request needs live data or an action).
+  // Set your own string to fully override it.
+  "systemPrompt": "",
+
+  "mcp": {
+    // "readonly" = only call tools that are safe to read with.
+    //   A tool is allowed if the server marks it read-only (readOnlyHint) OR
+    //   it is listed in readOnlyToolNames below.
+    // "all" = allow every tool from every server (including config changes).
+    "enabledTools": "readonly",
+
+    // Optional override: tool names to treat as read-only in "readonly" mode,
+    // for servers that don't advertise a readOnlyHint. Usually you can leave
+    // this empty and rely on the server's own hints.
+    "readOnlyToolNames": [],
+
+    "servers": [
+      // ---------------------------------------------------------------------
+      // Every MCP server is reached over HTTP. Start the server separately,
+      // then point the bridge at its URL. Include the endpoint path (often
+      // "/mcp"). Both http:// and https:// are supported.
+      // ---------------------------------------------------------------------
+
+      // TEMPLATE 1 - Local HTTP server, no auth.
+      {
+        "name": "junos",
+        "url": "http://localhost:30030/mcp",
+        "headers": {}
+      },
+
+      // TEMPLATE 2 - Another local HTTP server on a different port.
+      {
+        "name": "bootcamp",
+        "url": "http://localhost:8010/mcp",
+        "headers": {}
+      },
+
+      // TEMPLATE 3 - Remote HTTP server that needs an Authorization header.
+      {
+        "name": "remote-secured",
+        "url": "https://mcp.example.com/mcp",
+        "headers": {
+          "Authorization": "Bearer YOUR_TOKEN"
+        }
+      }
+    ]
+  },
+
+  "whatsapp": {
+    // Messages you send from your own number must start with this prefix.
+    "triggerPrefix": "@juni",
+
+    // Other numbers allowed to message the bot (digits only, with country code,
+    // no '+'). Empty = only your own trigger-prefixed messages are processed.
+    "allowedNumbers": []
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "ai": {
+    "provider": "copilot",
+    "model": "claude-sonnet-4.5",
+    "apiKeys": {
+      "openai": "",
+      "anthropic": "",
+      "gemini": ""
+    }
+  },
+  "systemPrompt": "",
+  "mcp": {
+    "enabledTools": "all",
+    "readOnlyToolNames": [
+      "get_router_list",
+      "get_junos_config",
+      "junos_config_diff",
+      "gather_device_facts",
+      "list_labs",
+      "get_lab",
+      "get_exercise",
+      "list_exercises",
+      "get_lab_objectives",
+      "search_guide",
+      "get_page_number"
+    ],
+    "servers": [
+      {
+        "name": "junos",
+        "url": "http://localhost:30030/mcp",
+        "headers": {}
+      }
+    ]
+  },
+  "whatsapp": {
+    "triggerPrefix": "@juni",
+    "allowedNumbers": []
+  }
+}

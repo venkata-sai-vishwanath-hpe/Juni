@@ -1,0 +1,95 @@
+{
+  "name": "junos-whatsapp-bridge",
+  "displayName": "Juni — Your network, one text away",
+  "description": "Talk to your Junos MCP server from WhatsApp using Copilot models via the VS Code Language Model API.",
+  "version": "0.1.0",
+  "publisher": "local",
+  "private": true,
+  "license": "MIT",
+  "author": "Junos WhatsApp Bridge contributors",
+  "keywords": [
+    "junos",
+    "whatsapp",
+    "mcp",
+    "copilot",
+    "network-automation"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/venkata-sai-vishwanath-hpe/Juni.git"
+  },
+  "bugs": {
+    "url": "https://github.com/venkata-sai-vishwanath-hpe/Juni/issues"
+  },
+  "homepage": "https://github.com/venkata-sai-vishwanath-hpe/Juni#readme",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "commands": [
+      {
+        "command": "junosWhatsapp.start",
+        "title": "Junos WhatsApp: Start Bridge"
+      },
+      {
+        "command": "junosWhatsapp.stop",
+        "title": "Junos WhatsApp: Stop Bridge"
+      },
+      {
+        "command": "junosWhatsapp.showQr",
+        "title": "Junos WhatsApp: Show Login QR"
+      },
+      {
+        "command": "junosWhatsapp.logout",
+        "title": "Junos WhatsApp: Log Out / Unlink"
+      },
+      {
+        "command": "junosWhatsapp.selectModel",
+        "title": "Junos WhatsApp: Select Copilot Model"
+      },
+      {
+        "command": "junosWhatsapp.openConfig",
+        "title": "Junos WhatsApp: Open Config File"
+      }
+    ],
+    "configuration": {
+      "title": "Junos WhatsApp Bridge",
+      "properties": {
+        "junosWhatsapp.configPath": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to the central bridge.config.json (AI provider/model, API keys, MCP servers, system prompt, WhatsApp settings). If empty, '<workspace>/bridge.config.json' is used, otherwise the file shipped with the extension. Run 'Junos WhatsApp: Open Config File' to edit it."
+        },
+        "junosWhatsapp.resetAuthOnStart": {
+          "type": "boolean",
+          "default": true,
+          "description": "If true, clear stored WhatsApp auth state every time Start Bridge runs so login always begins with a fresh QR code."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "setup": "bash setup.sh",
+    "build": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "vscode:prepublish": "npm run build"
+  },
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "@whiskeysockets/baileys": "^6.7.16",
+    "pino": "^9.5.0",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/vscode": "^1.95.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.5.0"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  // Copy this file to settings.json and adjust as needed.
+  // All values are OPTIONAL — the bridge auto-detects a sibling
+  // `junos-mcp-server` folder and uses `python3` by default.
+
+  // Python interpreter that can `import jnpr.junos` (use a venv path if needed).
+  "junosWhatsapp.pythonPath": "python3",
+
+  // Absolute path to the junos-mcp-server folder (the one containing jmcp.py).
+  // Leave unset to auto-detect a sibling folder named "junos-mcp-server".
+  // "junosWhatsapp.serverCwd": "/absolute/path/to/junos-mcp-server",
+
+  // Device mapping file passed to jmcp.py (-f).
+  "junosWhatsapp.deviceMapping": "devices.json",
+
+  // Copilot model family. Falls back to any available Copilot model.
+  "junosWhatsapp.modelFamily": "gpt-4o",
+
+  // Read-only tools only ("readonly") or include config-changing tools ("all").
+  "junosWhatsapp.enabledTools": "readonly",
+
+  // Prefix required for messages sent from your own number.
+  "junosWhatsapp.triggerPrefix": "@juni",
+
+  // Other phone numbers allowed to message the bot (digits + country code, no '+').
+  "junosWhatsapp.allowedNumbers": []
+}
